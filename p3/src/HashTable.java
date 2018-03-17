@@ -6,6 +6,8 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     @Override
     public V put(K key, V value) {
         //TODO: Implement put method - using efficient algorithm
+    	System.out.println("hello josh, thanks david!");
+    	System.out.println("lmao");
         return null;
     }
 
