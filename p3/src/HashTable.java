@@ -4,20 +4,24 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
      * Instance variables and constructors
      */
     double loadFactor = 0.75;
-    V[] hashTable;
     int arraySize;
+    V[] hashTable;
     int itemCount = 0;
 
     @Override
     public V put(K key, V value) {
         // TODO: Implement put method - using efficient algorithm
+        if (hashTable == null) {
+            arraySize = 10;
+            hashTable = new V[arraySize];
+        }
 
         return null;
     }
     
-    private K hashFunction(V value) {
-        K key = null;
-        return key;
+    private int hashFunction(K key) {
+        //FIXME: takes wrong parameter, must take key and output hashIndex
+        return -99;
     }
 
     @Override
@@ -28,7 +32,8 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     @Override
     public V get(K key) {
         // TODO: Implement the get method
-        return null;
+        int index = hashFunction(key);
+        return hashTable[index];
     }
 
     @Override
