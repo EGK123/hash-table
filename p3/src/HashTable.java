@@ -10,13 +10,13 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	K[] keys;
 	int itemCount = 0;
 
-<<<<<<< HEAD
+
 	HashTable(int size) {
 		arraySize = size;
 		hashTable = (V[]) new Object[size];
 		keys = (K[]) new Object[size];
 	}
-=======
+
     /**
     *
     * @param key : The key that goes into the hashtable
@@ -51,21 +51,20 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
         }
         return old;
     }
-    
+ /*   
     private V[] tableExpand() {
         //FIXME: couldnt figure out generic array, will do research and fix 3/18
         arraySize = arraySize * 2;
         V[] newTable = (V[]) newTable[arraySize];
         return hashTable;
         
-    }
+    }*/
     
     private int hashFunction(K key) {
         //FIXME: takes wrong parameter, must take key and output hashIndex
         
         return -99;
     }
->>>>>>> 78debee6fb2ef0fe275454a72cf923374b067cad
 
 	/**
 	 *
@@ -82,6 +81,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		if (key == null) {
 			throw new NullPointerException();
 		}
+		keys[itemCount++]=key;
 		V old = null;
 		int index = hashFunction(key);
 		if (hashTable[index] == null) {
