@@ -55,7 +55,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 				}
 			}
 		}
-		if (itemCount / arraySize >= 0.75) {
+		if (itemCount / arraySize >= loadFactor) {
 			increase(arraySize);
 		}
 		return old;
