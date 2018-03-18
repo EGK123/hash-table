@@ -66,46 +66,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
         return -99;
     }
 
-	/**
-	 *
-	 * @param key
-	 *            : The key that goes into the hashtable
-	 * @param value:
-	 *            The Value associated with the key
-	 * @return value of the key added to the hashtable, throws NullPointerException
-	 *         if key is null
-	 */
-	@Override
-	public V put(K key, V value) {
-		// TODO: Implement put method - using efficient algorithm
-		if (key == null) {
-			throw new NullPointerException();
-		}
-		keys[itemCount++]=key;
-		V old = null;
-		int index = hashFunction(key);
-		if (hashTable[index] == null) {
-			old = hashTable[index];
-			hashTable[index] = value;
-		} else {
-			boolean insert = false;
-			while (insert == false) {
-				index += 1;
-				if (hashTable[index] == null) {
-					old = hashTable[index];
-					hashTable[index] = value;
-					insert = true;
-				}
-			}
-		}
-		return old;
-	}
-
-	private int hashFunction(K key) {
-		// FIXME: takes wrong parameter, must take key and output hashIndex
-
-		return -99;
-	}
 
 	@Override
 	public void clear() {
