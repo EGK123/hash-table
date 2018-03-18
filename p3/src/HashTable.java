@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 
 public class HashTable<K, V> implements HashTableADT<K, V> {
     /*
@@ -8,14 +9,32 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     V[] hashTable;
     int itemCount = 0;
 
+    /**
+    *
+    * @param key : The key that goes into the hashtable
+    * @param value: The Value associated with the key
+    * @return value of the key added to the hashtable,
+    *      throws NullPointerException if key is null
+    */
     @Override
     public V put(K key, V value) {
         // TODO: Implement put method - using efficient algorithm
-        if (hashTable == null) {
-            arraySize = 10;
-            hashTable = new V[arraySize];
+        if (key == null) {
+            throw new NullPointerException();
         }
-
+        int index = hashFunction(key);
+        if (hashTable[index] == null) {
+            hashTable[index] = value;
+        } else {
+            boolean insert = false;
+            while (insert == false) {
+                index += 1;
+                if (hashTable[index] == null) {
+                    hashTable[index] = value;
+                    insert = true;
+                }
+            }
+        }
         return null;
     }
     
@@ -29,11 +48,20 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
         // TODO: Implement this method
     }
 
+    /**
+     * @param key: The key for which the value is returned
+     * @return The value associated with the key,
+     *          else throws NoSuch Element Exception
+     */
     @Override
     public V get(K key) {
         // TODO: Implement the get method
         int index = hashFunction(key);
-        return hashTable[index];
+        V value = hashTable[index];
+        if (value == null) {
+            throw new NoSuchElementException();
+        }
+        return value;
     }
 
     @Override
