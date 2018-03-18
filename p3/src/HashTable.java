@@ -4,16 +4,24 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	/*
 	 * Instance variables and constructors
 	 */
-	double loadFactor = 0.75;
+	double loadFactor;
 	int arraySize;
 	V[] hashTable;
 	K[] keys;
 	int itemCount = 0;
 
-	HashTable(int size) {
+	HashTable(int size, double LF) {
+	    loadFactor = LF;
 		arraySize = size;
 		hashTable = (V[]) new Object[size];
 		keys = (K[]) new Object[size];
+	}
+	
+	HashTable(int size) {
+	    loadFactor = 0.75;
+        arraySize = size;
+        hashTable = (V[]) new Object[size];
+        keys = (K[]) new Object[size];
 	}
 
 	/**
@@ -66,6 +74,9 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		return -99;
 	}
 
+	/**
+     * Clear the hashtable of all its contents
+     */
 	@Override
 	public void clear() {
 		// TODO: Implement this method
@@ -136,9 +147,11 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		return null;
 	}
 
+	/**
+    * @return: The total number of entries in the hashtable
+    */
 	@Override
 	public int size() {
-		// TODO: Implement this method
 		return itemCount;
 	}
 }
