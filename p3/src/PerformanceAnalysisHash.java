@@ -113,6 +113,28 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareSearch() {
         //TODO: Complete this method
+    	TreeMap map = new TreeMap();
+    	HashTable table = new HashTable(inputData.size(), .75);
+    	for (int i = 0; i < inputData.size(); i++) {
+    		map.put(inputData.get(i), inputData.get(i));
+    	}
+    	for (int i = 0; i < inputData.size(); i++) {
+    		table.put(inputData.get(i), inputData.get(i));
+    	}
+    	
+    	long startTreeMap = System.nanoTime();
+    	for (int i = inputData.size(); i > 0; i--) {
+    		map.get(inputData.get(i));
+    	}
+    	long endTreeMap = System.nanoTime();
+    	long timeTreeMap = endTreeMap - startTreeMap;
+    	
+    	long startHashTable = System.nanoTime();
+    	for (int i = inputData.size(); i > 0; i--) {
+    		table.get(inputData.get(i));
+    	}
+    	long endHashTable = System.nanoTime();
+    	long timeHashTable = endHashTable - startHashTable;
     }
 
     /*
