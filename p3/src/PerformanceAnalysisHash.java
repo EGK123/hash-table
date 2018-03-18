@@ -12,26 +12,48 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public PerformanceAnalysisHash(String details_filename){
         //TODO: Save the details of the test data files
     }
+    
+    /**
+     * The important function that compares the implemented HashTable with
+     * TreeMap of Java and generates the table with all the comparision details
+     * This can internally call - compareInsertion, compareDeletion, CompareSearch
+     * for all the test data provided.
+     */
     @Override
     public void compareDataStructures() {
         //TODO: Complete this function which compares the ds and generates the details
     }
 
+    /** Function used to print out the final report
+    *
+    */
     @Override
     public void printReport() {
         //TODO: Complete this method
     }
 
+    /**
+     * Standalone method for comparing insertion operation
+     * across HashTable and TreeMap
+     */
     @Override
     public void compareInsertion() {
         //TODO: Complete this method
     }
 
+    /**
+     * Standalone method for comparing deletion operation
+     * across HashTable and TreeMap
+     */
     @Override
     public void compareDeletion() {
         //TODO: Complete this method
     }
 
+    /**
+     * Standalone method for comparing search operation
+     * across HashTable and TreeMap
+     */
     @Override
     public void compareSearch() {
         //TODO: Complete this method
@@ -42,6 +64,12 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     Please feel free to make any changes if required as per your implementation.
     However, this function can be used as is.
      */
+    /**
+    *
+    * @param filename: Loads the data from the test file to local data structure
+    *                This is already implemented for you.
+    * @throws IOException
+    */
     @Override
     public void loadData(String filename) throws IOException {
 
