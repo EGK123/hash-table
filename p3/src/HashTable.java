@@ -4,16 +4,24 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	/*
 	 * Instance variables and constructors
 	 */
-	double loadFactor = 0.75;
+	double loadFactor;
 	int arraySize;
 	V[] hashTable;
 	K[] keys;
 	int itemCount = 0;
 
-	HashTable(int size) {
-		arraySize = size;
-		hashTable = (V[]) new Object[size];
-		keys = (K[]) new Object[size];
+	HashTable(int initialCapacity, double loadFactor) {
+	    this.loadFactor = loadFactor;
+		arraySize = initialCapacity;
+		hashTable = (V[]) new Object[arraySize];
+		keys = (K[]) new Object[arraySize];
+	}
+	
+	HashTable(int initialCapacity) {
+	    loadFactor = 0.75;
+        arraySize = initialCapacity;
+        hashTable = (V[]) new Object[initialCapacity];
+        keys = (K[]) new Object[initialCapacity];
 	}
 
 	/**
@@ -47,28 +55,38 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 				}
 			}
 		}
-		if (itemCount / arraySize >= 0.75) {
+		if (itemCount / arraySize >= loadFactor) {
 			increase(arraySize);
 		}
 		return old;
 	}
-	/*
-	 * private V[] tableExpand() { //FIXME: couldnt figure out generic array, will
-	 * do research and fix 3/18 arraySize = arraySize * 2; V[] newTable = (V[])
-	 * newTable[arraySize]; return hashTable;
-	 * 
-	 * }
-	 */
+
 
 	private int hashFunction(K key) {
 		// FIXME: takes wrong parameter, must take key and output hashIndex
-
-		return -99;
+	    int hashIndex;
+	    try {
+	        hashIndex = Integer.parseInt(key.toString()) % arraySize;
+	    } catch (NumberFormatException E){
+	        String k = key.toString();
+	        int hash = 7;      //This and next two lines modified from a post on stackoverflow,
+	        for (int i = 0; i < k.length(); i++) {     //source : https://stackoverflow.com/questions/2624192/good-hash-function-for-strings
+	            hash = hash*31 + k.charAt(i);
+	        }
+	        hashIndex = hash % arraySize;
+	    }
+		return hashIndex;
 	}
 
+	/**
+     * Clear the hashtable of all its contents
+     */
 	@Override
 	public void clear() {
 		// TODO: Implement this method
+	    for (V element : hashTable) {
+	        element = null;
+	    }
 	}
 
 	/**
@@ -114,10 +132,10 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
 		hashTable = (V[]) new Object[nextPrime];
-		int j = hashTable.get(12);
+//		int j = hashTable.get(12);
 		arraySize = nextPrime;
 		for (int i = 0; i < itemCount; i++) {
-			hashTable.put(keys[i], hashTable.get(keys[i]));
+			put(keys[i], get(keys[i]));
 		}
 	}
 
@@ -130,15 +148,32 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		return false;
 	}
 
+	/**
+    *
+    * @param key: Key of the entry to be removed
+    * @return value: Value of the key-value pair removed,
+    *          null if key did not have a mapping
+    * @throws NullPointerException if key is null
+    */
 	@Override
 	public V remove(K key) {
 		// TODO: Implement the remove method
-		return null;
+	    if (key == null) {
+	        throw new NullPointerException();
+	    }
+	    int index = hashFunction(key);
+	    V value = hashTable[index];
+	    
+		return value;
 	}
 
+	/**
+    * @return: The total number of entries in the hashtable
+    */
 	@Override
 	public int size() {
-		// TODO: Implement this method
-		return ;
+
+		// TODO: Implement this metho
+		return itemCount;
 	}
 }
