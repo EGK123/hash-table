@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class PerformanceAnalysisHash implements PerformanceAnalysis {
 
@@ -12,13 +13,21 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     }
 
     public PerformanceAnalysisHash(String details_filename) throws IOException{
-        //TODO: Save the details of the test data files
-    	details_filename.replace('\\',File.separatorChar).replace('/',File.separatorChar);		//adapted from method found on stackoverflow 
-    	for (String line : Files.readAllLines(Paths.get(File.separator + "data" + File.separator + "details_filename"))) {	//can be found at : https://stackoverflow.com/questions/2788080/java-how-to-read-a-text-file
-    		for (String part : line.split("\\s+")) {
-    			inputData.add(part);
+    	loadData(File.separator + "data" + File.separator + details_filename);
+    	if (details_filename.contains("Integer")) {
+    		ArrayList<Integer> intData = new ArrayList<Integer>();
+    		int length = inputData.size();
+    		for (int i = 0; i < length ; i++) {
+    			intData.add(Integer.valueOf(inputData.get(i)));
     		}
+    		ArrayList<Integer> inputData = intData;		//overwrote input data to integer arraylist
     	}
+//    	details_filename.replace('\\',File.separatorChar).replace('/',File.separatorChar);		//adapted from method found on stackoverflow 
+//    	for (String line : Files.readAllLines(Paths.get(File.separator + "data" + File.separator + "details_filename"))) {	//can be found at : https://stackoverflow.com/questions/2788080/java-how-to-read-a-text-file
+//    		for (String part : line.split("\\s+")) {
+//    			inputData.add(part);
+//    		}
+//    	}
 
     }
     
@@ -48,7 +57,22 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareInsertion() {
         //TODO: Complete this method
+    	TreeMap map = new TreeMap();
+    	long startTreeMap = System.nanoTime();
+    	for (int i = 0; i < inputData.size(); i++) {
+    		map.put(inputData.get(i), inputData.get(i));
+    	}
+    	long endTreeMap = System.nanoTime();
+    	long timeTreeMap = endTreeMap - startTreeMap;
     	
+    	HashTable table = new HashTable(inputData.size(), .75);
+    	long startHashTable = System.nanoTime();
+    	for (int i = 0; i < inputData.size(); i++) {
+    		map.put(inputData.get(i), inputData.get(i));
+    	}
+    	long endHashTable = System.nanoTime();
+    	long timeHashTable = endHashTable - startHashTable;
+    		
     }
 
     /**
@@ -58,6 +82,16 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareDeletion() {
         //TODO: Complete this method
+    	TreeMap map = new TreeMap();
+    	HashTable table = new HashTable(inputData.size(), .75);
+    	for (int i = 0; i < inputData.size(); i++) {
+    		map.put(inputData.get(i), inputData.get(i));
+    	}
+    	for (int i = 0; i < inputData.size(); i++) {
+    		map.put(inputData.get(i), inputData.get(i));
+    	}
+    	
+    	
     }
 
     /**
