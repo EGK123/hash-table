@@ -1,0 +1,13 @@
+To Do:
+
+Make read in data based off of data_details.txt
+
+Add compareDataStructures
+
+Add printReport
+
+Test/ Debug
+
+Comment (including file headers)
+
+Submit

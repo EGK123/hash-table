@@ -12,7 +12,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public PerformanceAnalysisHash(){
     }
 
-    public PerformanceAnalysisHash(String details_filename) throws IOException{
+    public PerformanceAnalysisHash(String details_filename) throws IOException{		//CHECK IF READING CORRECTLY
     	loadData(File.separator + "data" + File.separator + details_filename);
     	if (details_filename.contains("Integer")) {
     		ArrayList<Integer> intData = new ArrayList<Integer>();
@@ -40,6 +40,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareDataStructures() {
         //TODO: Complete this function which compares the ds and generates the details
+    	
     }
 
     /** Function used to print out the final report
