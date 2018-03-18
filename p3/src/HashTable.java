@@ -80,6 +80,12 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	@Override
 	public void clear() {
 		// TODO: Implement this method
+	    for (V element : hashTable) {
+	        element = null;
+	    }
+	    for (K key : keys) {
+	        key = null;
+	    }
 	}
 
 	/**
