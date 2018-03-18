@@ -143,6 +143,10 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		}
 	}
 
+	/**
+     * Checks if the hashtable is empty
+     * @return true : if Empty, else False
+     */
 	@Override
 	public boolean isEmpty() {
 		// TODO: Implement the method
@@ -186,8 +190,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     */
 	@Override
 	public int size() {
-
-		// TODO: Implement this metho
 		return itemCount;
 	}
 }
