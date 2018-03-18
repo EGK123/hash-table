@@ -22,24 +22,28 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
         if (key == null) {
             throw new NullPointerException();
         }
+        V old = null;
         int index = hashFunction(key);
         if (hashTable[index] == null) {
+            old = hashTable[index];
             hashTable[index] = value;
         } else {
             boolean insert = false;
             while (insert == false) {
                 index += 1;
                 if (hashTable[index] == null) {
+                    old = hashTable[index];
                     hashTable[index] = value;
                     insert = true;
                 }
             }
         }
-        return null;
+        return old;
     }
     
     private int hashFunction(K key) {
         //FIXME: takes wrong parameter, must take key and output hashIndex
+        
         return -99;
     }
 
