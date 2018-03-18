@@ -132,10 +132,10 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
 		hashTable = (V[]) new Object[nextPrime];
-		int j = hashTable.get(12);
+//		int j = hashTable.get(12);
 		arraySize = nextPrime;
 		for (int i = 0; i < itemCount; i++) {
-			hashTable.put(keys[i], hashTable.get(keys[i]));
+			put(keys[i], get(keys[i]));
 		}
 	}
 
