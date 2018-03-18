@@ -148,10 +148,23 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		return false;
 	}
 
+	/**
+    *
+    * @param key: Key of the entry to be removed
+    * @return value: Value of the key-value pair removed,
+    *          null if key did not have a mapping
+    * @throws NullPointerException if key is null
+    */
 	@Override
 	public V remove(K key) {
 		// TODO: Implement the remove method
-		return null;
+	    if (key == null) {
+	        throw new NullPointerException();
+	    }
+	    int index = hashFunction(key);
+	    V value = hashTable[index];
+	    
+		return value;
 	}
 
 	/**
