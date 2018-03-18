@@ -10,18 +10,18 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	K[] keys;
 	int itemCount = 0;
 
-	HashTable(int size, double LF) {
-	    loadFactor = LF;
-		arraySize = size;
-		hashTable = (V[]) new Object[size];
-		keys = (K[]) new Object[size];
+	HashTable(int initialCapacity, double loadFactor) {
+	    this.loadFactor = loadFactor;
+		arraySize = initialCapacity;
+		hashTable = (V[]) new Object[arraySize];
+		keys = (K[]) new Object[arraySize];
 	}
 	
-	HashTable(int size) {
+	HashTable(int initialCapacity) {
 	    loadFactor = 0.75;
-        arraySize = size;
-        hashTable = (V[]) new Object[size];
-        keys = (K[]) new Object[size];
+        arraySize = initialCapacity;
+        hashTable = (V[]) new Object[initialCapacity];
+        keys = (K[]) new Object[initialCapacity];
 	}
 
 	/**
