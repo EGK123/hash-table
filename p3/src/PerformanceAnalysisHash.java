@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class PerformanceAnalysisHash implements PerformanceAnalysis {
@@ -9,8 +11,15 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public PerformanceAnalysisHash(){
     }
 
-    public PerformanceAnalysisHash(String details_filename){
+    public PerformanceAnalysisHash(String details_filename) throws IOException{
         //TODO: Save the details of the test data files
+    	details_filename.replace('\\',File.separatorChar).replace('/',File.separatorChar);		//adapted from method found on stackoverflow 
+    	for (String line : Files.readAllLines(Paths.get(File.separator + "data" + File.separator + "details_filename"))) {	//can be found at : https://stackoverflow.com/questions/2788080/java-how-to-read-a-text-file
+    		for (String part : line.split("\\s+")) {
+    			inputData.add(part);
+    		}
+    	}
+
     }
     
     /**
