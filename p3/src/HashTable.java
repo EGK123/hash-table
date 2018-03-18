@@ -38,7 +38,18 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
                 }
             }
         }
+        if (itemCount/arraySize >= 0.75) {
+            hashTable = tableExpand();
+        }
         return old;
+    }
+    
+    private V[] tableExpand() {
+        //FIXME: couldnt figure out generic array, will do research and fix 3/18
+        arraySize = arraySize * 2;
+        V[] newTable = (V[]) newTable[arraySize];
+        return hashTable;
+        
     }
     
     private int hashFunction(K key) {
