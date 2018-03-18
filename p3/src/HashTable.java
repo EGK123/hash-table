@@ -10,62 +10,61 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	K[] keys;
 	int itemCount = 0;
 
-
 	HashTable(int size) {
 		arraySize = size;
 		hashTable = (V[]) new Object[size];
 		keys = (K[]) new Object[size];
 	}
 
-    /**
-    *
-    * @param key : The key that goes into the hashtable
-    * @param value: The Value associated with the key
-    * @return value of the key added to the hashtable,
-    *      throws NullPointerException if key is null
-    */
-    @Override
-    public V put(K key, V value) {
-        // TODO: Implement put method - using efficient algorithm
-        if (key == null) {
-            throw new NullPointerException();
-        }
-        V old = null;
-        int index = hashFunction(key);
-        if (hashTable[index] == null) {
-            old = hashTable[index];
-            hashTable[index] = value;
-        } else {
-            boolean insert = false;
-            while (insert == false) {
-                index += 1;
-                if (hashTable[index] == null) {
-                    old = hashTable[index];
-                    hashTable[index] = value;
-                    insert = true;
-                }
-            }
-        }
-        if (itemCount/arraySize >= 0.75) {
-            hashTable = tableExpand();
-        }
-        return old;
-    }
- /*   
-    private V[] tableExpand() {
-        //FIXME: couldnt figure out generic array, will do research and fix 3/18
-        arraySize = arraySize * 2;
-        V[] newTable = (V[]) newTable[arraySize];
-        return hashTable;
-        
-    }*/
-    
-    private int hashFunction(K key) {
-        //FIXME: takes wrong parameter, must take key and output hashIndex
-        
-        return -99;
-    }
+	/**
+	 *
+	 * @param key
+	 *            : The key that goes into the hashtable
+	 * @param value:
+	 *            The Value associated with the key
+	 * @return value of the key added to the hashtable, throws NullPointerException
+	 *         if key is null
+	 */
+	@Override
+	public V put(K key, V value) {
+		// TODO: Implement put method - using efficient algorithm
+		if (key == null) {
+			throw new NullPointerException();
+		}
+		V old = null;
+		int index = hashFunction(key);
+		if (hashTable[index] == null) {
+			old = hashTable[index];
+			hashTable[index] = value;
+		} else {
+			boolean insert = false;
+			while (insert == false) {
+				index += 1;
+				if (hashTable[index] == null) {
+					old = hashTable[index];
+					hashTable[index] = value;
+					insert = true;
+				}
+			}
+		}
+		if (itemCount / arraySize >= 0.75) {
+			increase(arraySize);
+		}
+		return old;
+	}
+	/*
+	 * private V[] tableExpand() { //FIXME: couldnt figure out generic array, will
+	 * do research and fix 3/18 arraySize = arraySize * 2; V[] newTable = (V[])
+	 * newTable[arraySize]; return hashTable;
+	 * 
+	 * }
+	 */
 
+	private int hashFunction(K key) {
+		// FIXME: takes wrong parameter, must take key and output hashIndex
+
+		return -99;
+	}
 
 	@Override
 	public void clear() {
@@ -91,6 +90,8 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 
 	@SuppressWarnings("unchecked")
 	private void increase(int currentArraySize) {
+		// this stuff gets the next prime number which will be the size of the new array
+
 		boolean prime = false;
 		int nextPrime = 0;
 		int num = currentArraySize;
@@ -109,13 +110,14 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 			}
 
 		}
-		V[] tempArray = hashTable ;
+		// this stuff should make a temparray to hold the data then transfer it to the new bigger hashTable
+		V[] tempArray = hashTable;
 		int tempSize = arraySize;
 		hashTable = (V[]) new Object[nextPrime];
 		int j = hashTable.get(12);
 		arraySize = nextPrime;
-		for(int i=0;i<itemCount;i++) {
-			hashTable.put(keys[i], hashTable.get(keys[i]) );
+		for (int i = 0; i < itemCount; i++) {
+			hashTable.put(keys[i], hashTable.get(keys[i]));
 		}
 	}
 
