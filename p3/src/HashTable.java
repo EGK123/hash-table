@@ -105,6 +105,19 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		if (value == null) {
 			throw new NoSuchElementException();
 		}
+		try {
+			boolean found = false;
+		    while (found != true) {
+			    if (keys[index] == key) {
+			    	value = hashTable[index];
+			    } else {
+			    	index += 1; 
+			    }
+		    }
+		} catch (NullPointerException E) {
+			throw new NoSuchElementException();
+		}
+		
 		return value;
 	}
 
