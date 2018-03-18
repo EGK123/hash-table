@@ -164,8 +164,19 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	    if (key == null) {
 	        throw new NullPointerException();
 	    }
+	    V value = null;
 	    int index = hashFunction(key);
-	    V value = hashTable[index];
+	    boolean inserted = false;
+	    while (inserted != true) {
+		    if (keys[index] == key) {
+		    	keys[index] = null;
+		    	value = hashTable[index];
+		    	hashTable[index] = null;
+		    } else {
+		    	index += 1; 
+		    }
+	    }
+
 	    
 		return value;
 	}
@@ -175,6 +186,8 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     */
 	@Override
 	public int size() {
+
+		// TODO: Implement this metho
 		return itemCount;
 	}
 }
