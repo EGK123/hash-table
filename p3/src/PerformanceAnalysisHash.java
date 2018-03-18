@@ -39,6 +39,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareInsertion() {
         //TODO: Complete this method
+    	
     }
 
     /**

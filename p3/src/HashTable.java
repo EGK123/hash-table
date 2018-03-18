@@ -1,4 +1,5 @@
 import java.util.NoSuchElementException;
+import java.lang.Math;
 
 public class HashTable<K, V> implements HashTableADT<K, V> {
 	/*
@@ -44,6 +45,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		if (hashTable[index] == null) {
 			old = hashTable[index];
 			hashTable[index] = value;
+			keys[index] = key;
 		} else {
 			boolean insert = false;
 			while (insert == false) {
@@ -51,6 +53,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 				if (hashTable[index] == null) {
 					old = hashTable[index];
 					hashTable[index] = value;
+					keys[index] = key;
 					insert = true;
 				}
 			}
@@ -63,7 +66,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 
 
 	private int hashFunction(K key) {
-		// FIXME: takes wrong parameter, must take key and output hashIndex
 	    int hashIndex;
 	    try {
 	        hashIndex = Integer.parseInt(key.toString()) % arraySize;
@@ -77,7 +79,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	    }
 		return hashIndex;
 	}
-
+	
 	/**
      * Clear the hashtable of all its contents
      */
@@ -131,11 +133,13 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		// this stuff should make a temparray to hold the data then transfer it to the new bigger hashTable
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
+		K[] tempKeys = keys;
 		hashTable = (V[]) new Object[nextPrime];
+		keys = (K[]) new Object[nextPrime];
 //		int j = hashTable.get(12);
 		arraySize = nextPrime;
 		for (int i = 0; i < itemCount; i++) {
-			put(keys[i], get(keys[i]));
+			put(tempKeys[i], get(tempKeys[i]));
 		}
 	}
 
@@ -157,7 +161,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     */
 	@Override
 	public V remove(K key) {
-		// TODO: Implement the remove method
 	    if (key == null) {
 	        throw new NullPointerException();
 	    }
