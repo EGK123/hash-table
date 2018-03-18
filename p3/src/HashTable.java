@@ -139,6 +139,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	@Override
 	public int size() {
 		// TODO: Implement this method
-		return 0;
+		return ;
 	}
 }
