@@ -60,18 +60,22 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		}
 		return old;
 	}
-	/*
-	 * private V[] tableExpand() { //FIXME: couldnt figure out generic array, will
-	 * do research and fix 3/18 arraySize = arraySize * 2; V[] newTable = (V[])
-	 * newTable[arraySize]; return hashTable;
-	 * 
-	 * }
-	 */
+
 
 	private int hashFunction(K key) {
 		// FIXME: takes wrong parameter, must take key and output hashIndex
-
-		return -99;
+	    int hashIndex;
+	    try {
+	        hashIndex = Integer.parseInt(key.toString()) % arraySize;
+	    } catch (NumberFormatException E){
+	        String k = key.toString();
+	        int hash = 7;      //This and next two lines modified from a post on stackoverflow,
+	        for (int i = 0; i < k.length(); i++) {     //source : https://stackoverflow.com/questions/2624192/good-hash-function-for-strings
+	            hash = hash*31 + k.charAt(i);
+	        }
+	        hashIndex = hash % arraySize;
+	    }
+		return hashIndex;
 	}
 
 	/**
@@ -82,9 +86,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		// TODO: Implement this method
 	    for (V element : hashTable) {
 	        element = null;
-	    }
-	    for (K key : keys) {
-	        key = null;
 	    }
 	}
 
