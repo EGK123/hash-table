@@ -8,6 +8,12 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
 
     // The input data from each file is stored in this/ per file
     private ArrayList<?> inputData;
+    long insertionTime;
+    long deletionTime;
+    long compareTime;
+    long insertionTree;
+	long deletionTree;
+	long compareTree;
     
     public PerformanceAnalysisHash(){
     }
@@ -40,6 +46,9 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareDataStructures() {
         //TODO: Complete this function which compares the ds and generates the details
+    	compareInsertion();
+    	compareDeletion();
+    	compareSearch();
     	
     }
 
@@ -49,6 +58,11 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void printReport() {
         //TODO: Complete this method
+    	
+    		System.out.println("Hash Table insertion is "+insertionTime +"and Tree Map insertion is" +insertionTree);
+    		System.out.println("Hash Table deletion is "+deletionTime +"and Tree Map deletion is" +deletionTree);
+    		System.out.println("Hash Table compare is "+ compareTime +"and Tree Map compare is" +compareTree);
+    	
     }
 
     /**
@@ -73,7 +87,8 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	}
     	long endHashTable = System.nanoTime();
     	long timeHashTable = endHashTable - startHashTable;
-    		
+    		insertionTime = timeHashTable;
+    		insertionTree = timeTreeMap;
     }
 
     /**
@@ -105,6 +120,8 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	}
     	long endHashTable = System.nanoTime();
     	long timeHashTable = endHashTable - startHashTable;
+    	deletionTime = timeHashTable;
+    	deletionTree = timeTreeMap;
     }
 
     /**
@@ -136,6 +153,8 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	}
     	long endHashTable = System.nanoTime();
     	long timeHashTable = endHashTable - startHashTable;
+    	compareTime = timeHashTable;
+    	compareTree = timeTreeMap;
     }
 
     /*
