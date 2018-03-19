@@ -58,11 +58,19 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void printReport() {
         //TODO: Complete this method
-    	
-    		System.out.println("Hash Table insertion is "+insertionTime +"and Tree Map insertion is" +insertionTree);
+    	System.out.println("The report name : Perfrmance Analysis Report");
+    	System.out.println("------------------------------------------------------------------------------------------------");
+    	System.out.println("|            FileName|      Operation| Data Structure|   Time Taken (micro sec)|     Bytes Used|");		
+    	System.out.println("------------------------------------------------------------------------------------------------");
+    	while(data.hasNextLine()) {
+    		while(FileName.hasNextLine()) {
+    			System.out.println("|"    +IntegerSmall.txt+"|"            +PUT+"|"      +HASHTABLE+"|"                   +1279.0+"|"             +0+"|");
+    		}
+    	}
+    	System.out.println("Hash Table insertion is "+insertionTime +"and Tree Map insertion is" +insertionTree);
     		System.out.println("Hash Table deletion is "+deletionTime +"and Tree Map deletion is" +deletionTree);
     		System.out.println("Hash Table compare is "+ compareTime +"and Tree Map compare is" +compareTree);
-    	
+    		System.out.println("------------------------------------------------------------------------------------------------");
     }
 
     /**
