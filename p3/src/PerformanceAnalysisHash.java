@@ -67,7 +67,12 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		while(FileName.hasNextLine()) {
     		compareDataStructures();
     		//	System.out.println("|"    +IntegerSmall.txt+"|"            +PUT+"|"      +HASHTABLE+"|"                   +1279.0+"|"             +0+"|");
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", operation +"|", dataStructure+"|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "HASHTABLE|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "TREEMAP|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "HASHTABLE|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "TREEMAP|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "HASHTABLE|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "TREEMAP|", time +"|", bytes+"|" );
     		}
     	}
     	
