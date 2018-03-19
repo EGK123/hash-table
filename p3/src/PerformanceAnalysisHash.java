@@ -7,20 +7,20 @@ import java.util.TreeMap;
 public class PerformanceAnalysisHash implements PerformanceAnalysis {
 
     // The input data from each file is stored in this/ per file
-    private ArrayList<String> inputData;
+    private ArrayList<?> inputData;
     
     public PerformanceAnalysisHash(){
     }
 
     public PerformanceAnalysisHash(String details_filename) throws IOException{		//CHECK IF READING CORRECTLY, need to add reading of data.details and then getting files
-    	loadData(File.separator + "data" + File.separator + details_filename);
+    	loadData(File.separator + "data" + File.separator + details_filename);	//Try to adding wildcard
     	if (details_filename.contains("Integer")) {
-    		ArrayList<Integer> intData = new ArrayList<Integer>();
+    		ArrayList<?> intData = new ArrayList<?>();
     		int length = inputData.size();
     		for (int i = 0; i < length ; i++) {
-    			intData.add(Integer.valueOf(inputData.get(i)));
+    			intData.add(Integer.valueOf((String) inputData.get(i)));
     		}
-    		ArrayList<Integer> inputData = intData;		//overwrote input data to integer arraylist
+    		inputData = intData;		//overwrote input data to integer arraylist
     	}
 //    	details_filename.replace('\\',File.separatorChar).replace('/',File.separatorChar);		//adapted from method found on stackoverflow 
 //    	for (String line : Files.readAllLines(Paths.get(File.separator + "data" + File.separator + "details_filename"))) {	//can be found at : https://stackoverflow.com/questions/2788080/java-how-to-read-a-text-file
