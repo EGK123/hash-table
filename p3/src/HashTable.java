@@ -61,8 +61,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 				}
 			}
 		}
-		System.out.println("Items: " + itemCount);
-		System.out.println("arraysize" + arraySize);
 		if (itemCount / arraySize >= loadFactor) {
 			increase(arraySize);
 		}
@@ -137,24 +135,25 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	private void increase(int currentArraySize) {
 		// this stuff gets the next prime number which will be the size of the new array
 
-		boolean prime = false;
-		int nextPrime = 0;
-		int num = currentArraySize;
-		for (num++; !prime; num++) {
-
-			if (!(num % 2 == 0)) {
-				prime = true;
-				for (int i = 3; i * i <= num; i += 2) {
-					if (!(num % i == 0) && prime) {
-						prime = true;
-						nextPrime = num;
-					} else
-						prime = false;
-
-				}
-			}
-
-		}
+//		boolean prime = false;
+//		int nextPrime = 0;
+//		int num = currentArraySize;
+//		for (num++; !prime; num++) {
+//
+//			if (!(num % 2 == 0)) {
+//				prime = true;
+//				for (int i = 3; i * i <= num; i += 2) {
+//					if (!(num % i == 0) && prime) {
+//						prime = true;
+//						nextPrime = num;
+//					} else
+//						prime = false;
+//
+//				}
+//			}
+//
+//		}
+		int nextPrime = currentArraySize * 2;
 		// this stuff should make a temparray to hold the data then transfer it to the new bigger hashTable
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
@@ -165,6 +164,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 //		int j = hashTable.get(12);
 		arraySize = nextPrime;
 		System.out.println("*** arraySize" + arraySize);
+		itemCount = 0;
 		for (int i = 0; i < tempSize; i++) {
 			if (tempKeys[i] != null) {
 				put(tempKeys[i], tempArray[hashFunction(tempKeys[i])]);

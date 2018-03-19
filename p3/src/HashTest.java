@@ -140,11 +140,12 @@ public class HashTest {
 				table.put(i, "value"+i);
 			}
 			pass = true;
+			System.out.println(table.size());
 			
 		} catch (NullPointerException E) {
 			pass = false;
 		}
-		System.out.println(table.size());
+
 		if (pass == false)
 			fail("failed to insert 100 keys");
 	}
