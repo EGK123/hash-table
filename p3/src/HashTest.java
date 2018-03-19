@@ -129,4 +129,23 @@ public class HashTest {
 		if (pass == false)
 			fail("did not throw null pointer when null key inserted");
 	}
+	
+	@Test
+	public void test06_insert_100_keys() {
+		HashTableADT<Integer, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		int count = 100;
+		try {
+			for (int i = 0; i < count; i++) {
+				table.put(i, "value"+i);
+			}
+			pass = true;
+			
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+		System.out.println(table.size());
+		if (pass == false)
+			fail("failed to insert 100 keys");
+	}
 }

@@ -46,18 +46,23 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 			old = hashTable[index];
 			hashTable[index] = value;
 			keys[index] = key;
+			itemCount += 1;
 		} else {
 			boolean insert = false;
 			while (insert == false) {
 				index += 1;
+				System.out.println("Index: " + index);
 				if (hashTable[index] == null) {
 					old = hashTable[index];
 					hashTable[index] = value;
 					keys[index] = key;
 					insert = true;
+					itemCount += 1;
 				}
 			}
 		}
+		System.out.println("Items: " + itemCount);
+		System.out.println("arraysize" + arraySize);
 		if (itemCount / arraySize >= loadFactor) {
 			increase(arraySize);
 		}
@@ -89,6 +94,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	    for (V element : hashTable) {
 	        element = null;
 	    }
+	    itemCount = 0;
 	}
 
 	/**
@@ -122,6 +128,11 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		return value;
 	}
 
+	/**
+	 * increase array size to the next prime number, and rehash keys. This is done to try to maximize the
+	 * Evenness of the distribution of keys
+	 * @param currentArraySize the current array size
+	 */
 	@SuppressWarnings("unchecked")
 	private void increase(int currentArraySize) {
 		// this stuff gets the next prime number which will be the size of the new array
@@ -148,12 +159,16 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
 		K[] tempKeys = keys;
+		System.out.println("prime" + nextPrime);
 		hashTable = (V[]) new Object[nextPrime];
 		keys = (K[]) new Object[nextPrime];
 //		int j = hashTable.get(12);
 		arraySize = nextPrime;
-		for (int i = 0; i < itemCount; i++) {
-			put(tempKeys[i], get(tempKeys[i]));
+		System.out.println("*** arraySize" + arraySize);
+		for (int i = 0; i < tempSize; i++) {
+			if (tempKeys[i] != null) {
+				put(tempKeys[i], tempArray[hashFunction(tempKeys[i])]);
+			}
 		}
 	}
 
