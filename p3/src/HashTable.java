@@ -50,8 +50,14 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		} else {
 			boolean insert = false;
 			while (insert == false) {
-				index += 1;
-				System.out.println("Index: " + index);
+				System.out.println("Index:"+ index);
+				System.out.println("arraysize:"+ arraySize);
+				if (index-1 < arraySize) {		//allows linear probing to loop
+					index += 1;
+				} else {
+					index = 0;
+				}
+				
 				if (hashTable[index] == null) {
 					old = hashTable[index];
 					hashTable[index] = value;
@@ -61,6 +67,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 				}
 			}
 		}
+		System.out.println("ItemCount: " + itemCount);
 		if (itemCount / arraySize >= loadFactor) {
 			increase(arraySize);
 		}
@@ -76,7 +83,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	        String k = key.toString();
 	        int hash = 7;      //This and next two lines modified from a post on stackoverflow,
 	        for (int i = 0; i < k.length(); i++) {     //source : https://stackoverflow.com/questions/2624192/good-hash-function-for-strings
-	            hash = hash*31 + k.charAt(i);
+	            hash = Math.abs(hash*31 + k.charAt(i));
 	        }
 	        hashIndex = hash % arraySize;
 	    }
@@ -116,7 +123,12 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 			    	value = hashTable[index];
 			    	found = true;
 			    } else {
-			    	index += 1; 
+			    	if (index - 1 < arraySize) {	// allows linear probing to loop
+			    		index += 1; 
+			    	} else {
+			    		index = 0;
+			    	}
+			    	
 			    }
 		    }
 		} catch (NullPointerException E) {
@@ -158,12 +170,12 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
 		K[] tempKeys = keys;
-		System.out.println("prime" + nextPrime);
+//		System.out.println("prime" + nextPrime);
 		hashTable = (V[]) new Object[nextPrime];
 		keys = (K[]) new Object[nextPrime];
 //		int j = hashTable.get(12);
 		arraySize = nextPrime;
-		System.out.println("*** arraySize" + arraySize);
+//		System.out.println("*** arraySize" + arraySize);
 		itemCount = 0;
 		for (int i = 0; i < tempSize; i++) {
 			if (tempKeys[i] != null) {

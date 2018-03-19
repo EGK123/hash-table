@@ -140,7 +140,6 @@ public class HashTest {
 				table.put(i, "value"+i);
 			}
 			pass = true;
-			System.out.println(table.size());
 			
 		} catch (NullPointerException E) {
 			pass = false;
@@ -148,5 +147,65 @@ public class HashTest {
 
 		if (pass == false)
 			fail("failed to insert 100 keys");
+	}
+	
+	@Test
+	public void test07_insert_10000_keys() {
+		HashTableADT<Integer, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		int count = 10000;
+		try {
+			for (int i = 0; i < count; i++) {
+				table.put(i, "value"+i);
+			}
+			pass = true;
+			
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+
+		if (pass == false)
+			fail("failed to insert 100 keys");
+	}
+	
+	@Test
+	public void test08_insert_100_keys_get_3() {
+		HashTableADT<Integer, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		int count = 100;
+		try {
+			for (int i = 0; i < count; i++) {
+				table.put(i, "value"+i);
+			}
+			if (table.get(50).equals("value50") && table.get(11).equals("value11") && table.get(99).equals("value99")) {
+				pass = true;
+			}
+			
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+
+		if (pass == false)
+			fail("failed to insert 100 keys");
+	}
+	
+	@Test
+	public void test09_insert_100_strings() {
+		HashTableADT<String, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		int count = 100;
+		try {
+			for (int i = 0; i < count; i++) {
+				table.put("String"+i, "value"+i);
+				System.out.println(i);
+			}
+			pass = true;
+			
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+
+		if (pass == false)
+			fail("failed to insert 100 string keys");
 	}
 }
