@@ -18,7 +18,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		ArrayList<?> intData = new ArrayList<>();
     		int length = inputData.size();
     		for (int i = 0; i < length ; i++) {
-    			intData.add(Integer.valueOf((String)inputData.get(i)));
+    			intData.add(Integer.valueOf((String)inputData.get(i)), null);
     		}
     		inputData = intData;		//overwrote input data to integer arraylist
     	}
