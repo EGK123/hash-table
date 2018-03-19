@@ -15,10 +15,10 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public PerformanceAnalysisHash(String details_filename) throws IOException{		//CHECK IF READING CORRECTLY, need to add reading of data.details and then getting files
     	loadData(File.separator + "data" + File.separator + details_filename);	//Try to adding wildcard
     	if (details_filename.contains("Integer")) {
-    		ArrayList<?> intData = new ArrayList<?>();
+    		ArrayList<?> intData = new ArrayList<>();
     		int length = inputData.size();
     		for (int i = 0; i < length ; i++) {
-    			intData.add(Integer.valueOf((String) inputData.get(i)));
+    			intData.add(Integer.valueOf((String)inputData.get(i)));
     		}
     		inputData = intData;		//overwrote input data to integer arraylist
     	}
