@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class HashTest {
 
-	HashTableADT<Integer, String> table = null;
+	HashTableADT<String, String> table = new HashTable(11, .75);
 	String expected = null;
 	String actual = null;
 
@@ -31,7 +31,7 @@ public class HashTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		table = new HashTable(11, .75);
+
 	}
 
 	/**
@@ -43,9 +43,90 @@ public class HashTest {
 
 	@Test
 	public void test01_one_insert_null_key() {
-		expected = "true";
-		actual = "" + table.put(null, "value");
-		if (! expected.equals(actual))
-			fail("expected: "+expected+ " actual: "+actual);
+		HashTableADT<String, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		try {
+			table.put(null, "value");
+		} catch (NullPointerException E) {
+			pass = true;
+		}
+		
+		if (pass == false)
+			fail("did not throw null pointer when null key inserted");
+	}
+	
+	@Test
+	public void test02_insert_10_keys() {
+		HashTableADT<Integer, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		int count = 10;
+		try {
+			for (int i = 0; i < count; i++) {
+				table.put(i, "value"+i);
+			}
+			pass = true;
+			
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+		
+		if (pass == false)
+			fail("failed to insert 10 keys");
+	}
+	
+	@Test
+	public void test03_insert_10_keys_remove_10_keys() {
+		HashTableADT<Integer, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		int count = 10;
+		try {
+			for (int i = 0; i < count; i++) {
+				table.put(i, "value"+i);
+			}
+			for (int i = 0; i < count; i++) {
+				table.remove(i);
+			}
+			pass = true;
+			
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+		
+		if (pass == false)
+			fail("failed to insert 10 keys");
+	}
+	
+	@Test
+	public void test04_one_insert_and_get() {
+		HashTableADT<Integer, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		try {
+			table.put(888, "value");
+			if (table.get(888) == "value") {
+				pass = true;
+			}
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+		
+		if (pass == false)
+			fail("did not throw null pointer when null key inserted");
+	}
+	
+	@Test
+	public void test05_one_insert_and_get_string() {
+		HashTableADT<String, String> table = new HashTable(11, .75);
+		boolean pass = false;
+		try {
+			table.put("pleaseWork", "value");
+			if (table.get("pleaseWork").equals("value")) {
+				pass = true;
+			}
+		} catch (NullPointerException E) {
+			pass = false;
+		}
+		
+		if (pass == false)
+			fail("did not throw null pointer when null key inserted");
 	}
 }

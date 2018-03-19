@@ -108,8 +108,9 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		try {
 			boolean found = false;
 		    while (found != true) {
-			    if (keys[index] == key) {
+			    if (keys[index].equals(key)) {
 			    	value = hashTable[index];
+			    	found = true;
 			    } else {
 			    	index += 1; 
 			    }
@@ -183,16 +184,18 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	    }
 	    V value = null;
 	    int index = hashFunction(key);
-	    boolean inserted = false;
-	    while (inserted != true) {
+	    boolean removed = false;
+	    while (removed != true) {
 		    if (keys[index] == key) {
 		    	keys[index] = null;
 		    	value = hashTable[index];
 		    	hashTable[index] = null;
+		    	removed = true;
 		    } else {
 		    	index += 1; 
 		    }
 	    }
+	    itemCount -= 1;
 
 	    
 		return value;
