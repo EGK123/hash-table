@@ -63,13 +63,15 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	System.out.println("|            FileName|      Operation| Data Structure|   Time Taken (micro sec)|     Bytes Used|");		
     	System.out.println("------------------------------------------------------------------------------------------------");
     	while(data.hasNextLine()) {
+    		PerformanceAnalysisHash("data_details.txt");
     		while(FileName.hasNextLine()) {
+    		compareDataStructures();
     			System.out.println("|"    +IntegerSmall.txt+"|"            +PUT+"|"      +HASHTABLE+"|"                   +1279.0+"|"             +0+"|");
+    			System.out.println("|"    +IntegerSmall.txt+"|"            +PUT+"|"        +TREEMAP+"|"                   +1279.0+"|"             +0+"|");
+    			
     		}
     	}
-    	System.out.println("Hash Table insertion is "+insertionTime +"and Tree Map insertion is" +insertionTree);
-    		System.out.println("Hash Table deletion is "+deletionTime +"and Tree Map deletion is" +deletionTree);
-    		System.out.println("Hash Table compare is "+ compareTime +"and Tree Map compare is" +compareTree);
+    	
     		System.out.println("------------------------------------------------------------------------------------------------");
     }
 
