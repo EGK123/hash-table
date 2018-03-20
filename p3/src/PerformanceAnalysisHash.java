@@ -5,7 +5,7 @@
 //                   PerformanceAnalysis.java
 //                   HashTable.java
 //TYPE OF TREE:      Hash Table
-// USER:             Ege Kula Josh Stahm
+// USER:             Ege Kula Josh Stamn (jstamn@wisc.edu)
 //
 // Instructor:       Deb Deppeler (deppeler@cs.wisc.edu)
 // 
@@ -22,7 +22,7 @@ import java.util.TreeMap;
 public class PerformanceAnalysisHash implements PerformanceAnalysis {
 
     // The input data from each file is stored in this/ per file
-    private ArrayList<?> inputData;
+    private ArrayList<String> inputData;
     long insertionTime;
     long deletionTime;
     long compareTime;
@@ -35,25 +35,17 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     long insertionMemory;
 	long deletionTable;
 	long compareMemory;
+	private ArrayList<String> paths;
 	
     
     public PerformanceAnalysisHash(){
     }
 
     public PerformanceAnalysisHash(String details_filename) throws IOException{		
-//    	loadData( details_filename);	
-//    	if (details_filename.contains("Integer")) {
-//    		ArrayList<?> intData = new ArrayList<>();
-//    		int length = inputData.size();
-//    		for (int i = 0; i < length ; i++) {
-//    			intData.add(Integer.valueOf((String)inputData.get(i)), null);
-//    		}
-//    		inputData = intData;		//overwrote input data to integer arraylist
-//    	}
     	details_filename.replace('\\',File.separatorChar).replace('/',File.separatorChar);		//adapted from method found on stackoverflow 
     	ArrayList<String> toRead = new ArrayList<>();
-    	ArrayList<String> paths = new ArrayList<>();
-    	for (String line : Files.readAllLines(Paths.get(File.separator + "data" + File.separator + "details_filename"))) {	//can be found at : https://stackoverflow.com/questions/2788080/java-how-to-read-a-text-file
+    	paths = new ArrayList<>();
+    	for (String line : Files.readAllLines(Paths.get(details_filename))) {	//can be found at : https://stackoverflow.com/questions/2788080/java-how-to-read-a-text-file
     		for (String part : line.split("\\s+")) {
     			toRead.add(part);
     		}
@@ -62,7 +54,9 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	for (int i = 1; i < toRead.size(); i++) {
     		paths.add(toRead.get(i).split(",")[0]); 	//splits on comma and keeps first half as path 
     	}
-    	for (int i = 1)
+    	for (int i = 1; i < paths.size(); i++) {
+    		loadData(filepath + paths.get(i-1));
+    	}
 
     }
     
@@ -75,6 +69,9 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareDataStructures() {
         //TODO: Complete this function which compares the ds and generates the details
+    	
+    	
+    	
     	compareInsertion();
     	compareDeletion();
     	compareSearch();
@@ -92,9 +89,14 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	System.out.println("|            FileName|      Operation| Data Structure|   Time Taken (micro sec)|     Bytes Used|");		
     	System.out.println("------------------------------------------------------------------------------------------------");
     	
-    		while(data_details.txt.hasNextLine()) {
-    			String dataFile = data_details.txt.nextLine;
-    			loadData(dataFile);
+    		for (int i = 0; i < paths.size(); i++) {
+    			String dataFile = paths.get(i);
+    			try {
+					loadData(dataFile);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     		compareDataStructures();
     		
     		long bytes=0;
