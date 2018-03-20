@@ -1,3 +1,18 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS400 Spring 2018
+// PROJECT:          cs400_p3
+// FILES:            HashTest.java
+//                   PerformanceAnalysis.java
+//                   HashTable.java
+//TYPE OF TREE:      Hash Table
+// USER:             Ege Kula Josh Stahm
+//
+// Instructor:       Deb Deppeler (deppeler@cs.wisc.edu)
+// 
+//
+// March 19, 2018 
+//////////////////////////// 80 columns wide //////////////////////////////////
+
 import static org.junit.Assert.*;
 
 import org.junit.After;

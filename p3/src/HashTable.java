@@ -1,3 +1,18 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS400 Spring 2018
+// PROJECT:          cs400_p3
+// FILES:            HashTest.java
+//                   PerformanceAnalysis.java
+//                   HashTable.java
+//TYPE OF TREE:      Hash Table
+// USER:             Ege Kula Josh Stahm
+//
+// Instructor:       Deb Deppeler (deppeler@cs.wisc.edu)
+// 
+//
+// March 19, 2018 
+//////////////////////////// 80 columns wide //////////////////////////////////
+
 import java.util.NoSuchElementException;
 import java.lang.Math;
 
@@ -107,8 +122,8 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	}
 
 	/**
-	 * @param key:
-	 *            The key for which the value is returned
+	 * @param key:The key for which the value is returned
+	 *            
 	 * @return The value associated with the key, else throws NoSuch Element
 	 *         Exception
 	 */
@@ -143,7 +158,12 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * increase array size, and rehash keys. This is done to try to maximize the
+	 * Evenness of the distribution of keys
+=======
 	 * increase array size to double the current number, and rehash keys. 
+>>>>>>> eff4d858afd3b838434eec25ded4c8e2d8e4b436
 	 * @param currentArraySize the current array size
 	 */
 	@SuppressWarnings("unchecked")
