@@ -74,7 +74,11 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		return old;
 	}
 
-
+	/**
+     * @param the key to be hashed
+     * 
+     * @return the hashIndex where this key belongs
+     */
 	private int hashFunction(K key) {
 	    int hashIndex;
 	    try {

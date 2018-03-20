@@ -14,6 +14,13 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     long insertionTree;
 	long deletionTree;
 	long compareTree;
+	long insertionTable;
+    long deletionMemory;
+    long compareTable;
+    long insertionMemory;
+	long deletionTable;
+	long compareMemory;
+	
     
     public PerformanceAnalysisHash(){
     }
@@ -62,19 +69,22 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	System.out.println("------------------------------------------------------------------------------------------------");
     	System.out.println("|            FileName|      Operation| Data Structure|   Time Taken (micro sec)|     Bytes Used|");		
     	System.out.println("------------------------------------------------------------------------------------------------");
-    	while(data.hasNextLine()) {
-    		PerformanceAnalysisHash("data_details.txt");
-    		while(FileName.hasNextLine()) {
+    	
+    		while(data_details.txt.hasNextLine()) {
+    			String dataFile = data_details.txt.nextLine;
+    			loadData(dataFile);
     		compareDataStructures();
+    		
+    		long bytes=0;
     		//	System.out.println("|"    +IntegerSmall.txt+"|"            +PUT+"|"      +HASHTABLE+"|"                   +1279.0+"|"             +0+"|");
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "HASHTABLE|", time +"|", bytes+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "TREEMAP|", time +"|", bytes+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "HASHTABLE|", time +"|", bytes+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "TREEMAP|", time +"|", bytes+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "HASHTABLE|", time +"|", bytes+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "TREEMAP|", time +"|", bytes+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "HASHTABLE|", insertionTime +"|", insertionTable+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "TREEMAP|", insertionTree +"|", insertionMemory+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "HASHTABLE|", compareTime +"|", compareTable+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "TREEMAP|", compareTree +"|", compareMemory+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "HASHTABLE|", deletionTime +"|", deletionTable+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "TREEMAP|", deletionTree +"|", deletionMemory+"|" );
     		}
-    	}
+    	
     	
     		System.out.println("------------------------------------------------------------------------------------------------");
     }
@@ -86,14 +96,19 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     @Override
     public void compareInsertion() {
         //TODO: Complete this method
+    	
     	TreeMap map = new TreeMap();
     	long startTreeMap = System.nanoTime();
+    	Runtime runtimeTree = Runtime.getRuntime();
     	for (int i = 0; i < inputData.size(); i++) {
     		map.put(inputData.get(i), inputData.get(i));
     	}
     	long endTreeMap = System.nanoTime();
     	long timeTreeMap = endTreeMap - startTreeMap;
+    	runtimeTree.gc();
+    	insertionMemory = runtimeTree.totalMemory() - runtimeTree.freeMemory();
     	
+    	Runtime runtimeTable = Runtime.getRuntime();
     	HashTable table = new HashTable(inputData.size(), .75);
     	long startHashTable = System.nanoTime();
     	for (int i = 0; i < inputData.size(); i++) {
@@ -101,6 +116,9 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	}
     	long endHashTable = System.nanoTime();
     	long timeHashTable = endHashTable - startHashTable;
+    	runtimeTable.gc();
+    	insertionTable = runtimeTable.totalMemory() - runtimeTable.freeMemory();
+
     		insertionTime = timeHashTable;
     		insertionTree = timeTreeMap;
     }
@@ -113,6 +131,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public void compareDeletion() {
         //TODO: Complete this method
     	TreeMap map = new TreeMap();
+    	Runtime runtimeTree = Runtime.getRuntime();
     	HashTable table = new HashTable(inputData.size(), .75);
     	for (int i = 0; i < inputData.size(); i++) {
     		map.put(inputData.get(i), inputData.get(i));
@@ -127,13 +146,20 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	}
     	long endTreeMap = System.nanoTime();
     	long timeTreeMap = endTreeMap - startTreeMap;
+    	runtimeTree.gc();
+    	compareTable = runtimeTree.totalMemory() - runtimeTree.freeMemory();
+
     	
+    	Runtime runtimeTable = Runtime.getRuntime();
     	long startHashTable = System.nanoTime();
     	for (int i = 0; i < inputData.size(); i++) {
     		table.remove(inputData.get(i));
     	}
     	long endHashTable = System.nanoTime();
     	long timeHashTable = endHashTable - startHashTable;
+    	runtimeTable.gc();
+    	compareTable = runtimeTable.totalMemory() - runtimeTable.freeMemory();
+
     	deletionTime = timeHashTable;
     	deletionTree = timeTreeMap;
     }
@@ -146,6 +172,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public void compareSearch() {
         //TODO: Complete this method
     	TreeMap map = new TreeMap();
+    	Runtime runtimeTree = Runtime.getRuntime();
     	HashTable table = new HashTable(inputData.size(), .75);
     	for (int i = 0; i < inputData.size(); i++) {
     		map.put(inputData.get(i), inputData.get(i));
@@ -160,13 +187,19 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	}
     	long endTreeMap = System.nanoTime();
     	long timeTreeMap = endTreeMap - startTreeMap;
-    	
+    	runtimeTree.gc();
+    	deletionTable = runtimeTree.totalMemory() - runtimeTree.freeMemory();
+
+    	Runtime runtimeTable = Runtime.getRuntime();
     	long startHashTable = System.nanoTime();
     	for (int i = inputData.size(); i > 0; i--) {
     		table.get(inputData.get(i));
     	}
     	long endHashTable = System.nanoTime();
     	long timeHashTable = endHashTable - startHashTable;
+    	runtimeTable.gc();
+    	deletionTable = runtimeTable.totalMemory() - runtimeTable.freeMemory();
+
     	compareTime = timeHashTable;
     	compareTree = timeTreeMap;
     }
