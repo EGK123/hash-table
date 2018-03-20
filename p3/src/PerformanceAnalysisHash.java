@@ -92,6 +92,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	System.out.println("|            FileName|      Operation| Data Structure|   Time Taken (micro sec)|     Bytes Used|");		
     	System.out.println("------------------------------------------------------------------------------------------------");
     	
+    	
     		while(data_details.txt.hasNextLine()) {
     			String dataFile = data_details.txt.nextLine;
     			loadData(dataFile);
