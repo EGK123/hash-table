@@ -102,12 +102,12 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		
     		long bytes=0;
     		//	System.out.println("|"    +IntegerSmall.txt+"|"            +PUT+"|"      +HASHTABLE+"|"                   +1279.0+"|"             +0+"|");
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "HASHTABLE|", insertionTime +"|", insertionTable+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "PUT|", "TREEMAP|", insertionTree +"|", insertionMemory+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "HASHTABLE|", compareTime +"|", compareTable+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "GET|", "TREEMAP|", compareTree +"|", compareMemory+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "HASHTABLE|", deletionTime +"|", deletionTable+"|" );
-    			System.out.printf("%1s %20s %15s %15s %25d %15d %n", "|", dataFile+"|", "REMOVE|", "TREEMAP|", deletionTree +"|", deletionMemory+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25s %15s %n", "|", dataFile+"|", "PUT|", "HASHTABLE|", insertionTime +"|", insertionTable+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25s %15s %n", "|", dataFile+"|", "PUT|", "TREEMAP|", insertionTree +"|", insertionMemory+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25s %15s %n", "|", dataFile+"|", "GET|", "HASHTABLE|", compareTime +"|", compareTable+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25s %15s %n", "|", dataFile+"|", "GET|", "TREEMAP|", compareTree +"|", compareMemory+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25s %15s %n", "|", dataFile+"|", "REMOVE|", "HASHTABLE|", deletionTime +"|", deletionTable+"|" );
+    			System.out.printf("%1s %20s %15s %15s %25s %15s %n", "|", dataFile+"|", "REMOVE|", "TREEMAP|", deletionTree +"|", deletionMemory+"|" );
     		}
     	
     	
