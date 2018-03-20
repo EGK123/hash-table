@@ -54,9 +54,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	for (int i = 1; i < toRead.size(); i++) {
     		paths.add(toRead.get(i).split(",")[0]); 	//splits on comma and keeps first half as path 
     	}
-    	for (int i = 1; i < paths.size(); i++) {
-    		loadData(filepath + paths.get(i-1));
-    	}
+    	
 
     }
     
@@ -93,6 +91,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		for (int i = 0; i < paths.size(); i++) {
     			String dataFile = paths.get(i);
     			try {
+    				inputData.clear();
 					loadData(dataFile);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
