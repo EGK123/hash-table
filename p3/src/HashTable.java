@@ -158,12 +158,12 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	}
 
 	/**
-<<<<<<< HEAD
+
 	 * increase array size, and rehash keys. This is done to try to maximize the
 	 * Evenness of the distribution of keys
-=======
+
 	 * increase array size to double the current number, and rehash keys. 
->>>>>>> eff4d858afd3b838434eec25ded4c8e2d8e4b436
+
 	 * @param currentArraySize the current array size
 	 */
 	@SuppressWarnings("unchecked")
@@ -173,12 +173,12 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		V[] tempArray = hashTable;
 		int tempSize = arraySize;
 		K[] tempKeys = keys;
-//		System.out.println("prime" + nextPrime);
+
 		hashTable = (V[]) new Object[nextPrime];
 		keys = (K[]) new Object[nextPrime];
-//		int j = hashTable.get(12);
+
 		arraySize = nextPrime;
-//		System.out.println("*** arraySize" + arraySize);
+
 		itemCount = 0;
 		for (int i = 0; i < tempSize; i++) {
 			if (tempKeys[i] != null) {
