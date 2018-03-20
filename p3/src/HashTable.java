@@ -5,7 +5,7 @@
 //                   PerformanceAnalysis.java
 //                   HashTable.java
 //TYPE OF TREE:      Hash Table
-// USER:             Ege Kula Josh Stamn (jstamn@wisc.edu)
+// USER:             Ege Kula (ekula@wisc.edu) Josh Stamn (jstamn@wisc.edu)
 //
 // Instructor:       Deb Deppeler (deppeler@cs.wisc.edu)
 // 
