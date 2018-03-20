@@ -88,8 +88,8 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     	System.out.println("------------------------------------------------------------------------------------------------");
     	System.out.println("|            FileName|      Operation| Data Structure|   Time Taken (micro sec)|     Bytes Used|");		
     	System.out.println("------------------------------------------------------------------------------------------------");
-    	
-<<<<<<< HEAD
+
+
     		for (int i = 0; i < paths.size(); i++) {
     			String dataFile = paths.get(i);
     			try {
@@ -98,12 +98,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-=======
-    	
-    		while(data_details.txt.hasNextLine()) {
-    			String dataFile = data_details.txt.nextLine;
-    			loadData(dataFile);
->>>>>>> 25e14e2c4ccf38181df0b51cdcba3bf7f5af47e5
+
     		compareDataStructures();
     		
     		long bytes=0;
