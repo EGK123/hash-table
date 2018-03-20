@@ -1,0 +1,8 @@
+Expected results
+
+A Hash Table requires more memory than a Tree Map.
+
+A Hash Table will typically have a O(1) performance but Tree 
+Map will have a performance of O(log(n)).
+
+Actual results
